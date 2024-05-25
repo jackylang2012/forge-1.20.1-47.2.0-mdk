@@ -1,7 +1,11 @@
 package net.jackylang2012.tutortialmod;
 
 import com.mojang.logging.LogUtils;
+import net.jackylang2012.tutortialmod.items.ModCreativeModTabs;
+import net.jackylang2012.tutortialmod.items.Moditems;
+import net.jackylang2012.tutortialmod.items.block.ModBlocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -20,13 +24,18 @@ import org.slf4j.Logger;
 @Mod(LclMod.MOD_ID)
 public class LclMod {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "realm_of_specters";
+    public static final String MOD_ID = "stellar_dreamscapes";
 
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public LclMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModCreativeModTabs.register(modEventBus);
+
+        Moditems.registers(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -43,7 +52,9 @@ public class LclMod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){
+            event.accept(Moditems.Soul);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
