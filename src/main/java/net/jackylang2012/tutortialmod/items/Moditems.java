@@ -11,13 +11,12 @@ public class Moditems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, LclMod.MOD_ID);
 
-    public static final RegistryObject<Item> Soul = ITEMS.register("soul",
+    public static final RegistryObject<Item> STAR_DREAM_STRIDERS = ITEMS.register("star_dream_striders",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> Raw_Sirloin = ITEMS.register("raw_sirloin",
+    public static final RegistryObject<Item> STAR_DREAM_INGOT = ITEMS.register("star_dream_ingot",
             () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> Sirloin = ITEMS.register("sirloin",
+    public static final RegistryObject<Item> RAW_STAR_DREAM_INGOT = ITEMS.register("raw_star_dream_ingot",
             () -> new Item(new Item.Properties()));
 
     public static void registers(IEventBus eventBus) {

@@ -1,0 +1,1 @@
+{  "parent": "minecraft:block/cube_all",  "textures": {    "all": "stellar_dreamscapes:block/deepslate_dreamstone_ore_block"  }}

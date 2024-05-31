@@ -15,10 +15,17 @@ public class ModCreativeModTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LclMod.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> DREAM_TAB = CREATIVE_MODE_TABS.register("stellar_dreamscapes",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Moditems.Soul.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Moditems.STAR_DREAM_INGOT.get()))
                     .title(Component.translatable("creativetab.stellar_dreamscapes"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(Moditems.Soul.get());
+                        pOutput.accept(Moditems.STAR_DREAM_STRIDERS.get());
+                        pOutput.accept(Moditems.RAW_STAR_DREAM_INGOT.get());
+                        pOutput.accept(Moditems.STAR_DREAM_INGOT.get());
+
+                        pOutput.accept(ModBlocks.DREAMSTONE_ORE_BLOCK.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());
+                        pOutput.accept(ModBlocks.STAR_DREAM_BLOCK.get());
+
 
 
                     })

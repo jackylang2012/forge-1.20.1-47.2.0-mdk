@@ -18,7 +18,13 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, LclMod.MOD_ID);
 
-    public static final RegistryObject<Block> SOUL_BLOCK = registryBlock("soul_block",
+    public static final RegistryObject<Block> DREAMSTONE_ORE_BLOCK = registryBlock("dreamstone_ore_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> DEEPSLATE_DREAMSTONE_ORE_BLOCK = registryBlock("deepslate_dreamstone_ore_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> STAR_DREAM_BLOCK = registryBlock("star_dream_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block) {
