@@ -2,10 +2,12 @@ package net.jackylang2012.tutortialmod.items.block;
 
 import net.jackylang2012.tutortialmod.LclMod;
 import net.jackylang2012.tutortialmod.items.Moditems;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,10 +21,13 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, LclMod.MOD_ID);
 
     public static final RegistryObject<Block> DREAMSTONE_ORE_BLOCK = registryBlock("dreamstone_ore_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
+                    .strength(2f).requiresCorrectToolForDrops(), UniformInt.of(5, 7)));
+
 
     public static final RegistryObject<Block> DEEPSLATE_DREAMSTONE_ORE_BLOCK = registryBlock("deepslate_dreamstone_ore_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
+                    .strength(3f).requiresCorrectToolForDrops(), UniformInt.of(5, 8)));
 
     public static final RegistryObject<Block> STAR_DREAM_BLOCK = registryBlock("star_dream_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));

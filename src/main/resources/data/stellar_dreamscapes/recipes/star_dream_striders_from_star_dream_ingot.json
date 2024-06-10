@@ -1,0 +1,16 @@
+{
+  "type":"minecraft:crafting_shape",
+  "category": "misc",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "stellar_dreamscapes:star_dream_ingot"
+    }
+  },
+  "result": {
+    "item": "stellar_dreamscapes:star_dream_striders"
+  }
+}

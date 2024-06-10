@@ -18,6 +18,10 @@ public class Moditems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_STAR_DREAM_INGOT = ITEMS.register("raw_star_dream_ingot",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> KUN_MEAT = ITEMS.register("kun_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.KUN_MEAT)));
+    public static final RegistryObject<Item> KUN_RAW_MEAT = ITEMS.register("kun_raw_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.KUN_RAW_MEAT)));
 
     public static void registers(IEventBus eventBus) {
         ITEMS.register(eventBus);
