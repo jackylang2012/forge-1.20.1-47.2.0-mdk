@@ -1,0 +1,20 @@
+{
+  "type":"minecraft:crafting_shape",
+  "category": "misc",
+  "pattern": [
+    " # ",
+    "#!#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "stellar_dreamscapes:kun_blood"
+    },
+    "!": {
+      "item": "minecraft:coal"
+    }
+  },
+  "result": {
+    "item": "stellar_dreamscapes:kun_coal"
+  }
+}

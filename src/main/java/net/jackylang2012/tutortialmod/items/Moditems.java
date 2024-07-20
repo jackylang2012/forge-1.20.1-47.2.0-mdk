@@ -1,6 +1,7 @@
 package net.jackylang2012.tutortialmod.items;
 
 import net.jackylang2012.tutortialmod.LclMod;
+import net.jackylang2012.tutortialmod.items.custom.FuelItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,6 +23,10 @@ public class Moditems {
             () -> new Item(new Item.Properties().food(ModFoods.KUN_MEAT)));
     public static final RegistryObject<Item> KUN_RAW_MEAT = ITEMS.register("kun_raw_meat",
             () -> new Item(new Item.Properties().food(ModFoods.KUN_RAW_MEAT)));
+    public static final RegistryObject<Item> KUN_BLOOD = ITEMS.register("kun_blood",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> KUN_COAL = ITEMS.register("kun_coal",
+            () -> new FuelItem(new Item.Properties(), 36000));
 
     public static void registers(IEventBus eventBus) {
         ITEMS.register(eventBus);
