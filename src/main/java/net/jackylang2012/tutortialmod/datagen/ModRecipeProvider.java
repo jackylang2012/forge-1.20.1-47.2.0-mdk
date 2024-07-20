@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 public class ModRecipeProvider  extends RecipeProvider implements IConditionBuilder {
     private static final List<ItemLike> STAR_DREAM_SMELTABLES = List.of(Moditems.RAW_STAR_DREAM_INGOT.get(),
             ModBlocks.DREAMSTONE_ORE_BLOCK.get(), ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());
+    private static final List<ItemLike> KUN_MEAT_SMELTABLES = List.of(Moditems.KUN_RAW_MEAT.get());
     public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
@@ -26,8 +27,9 @@ public class ModRecipeProvider  extends RecipeProvider implements IConditionBuil
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-        oreBlasting(pWriter, STAR_DREAM_SMELTABLES, RecipeCategory.MISC, Moditems.STAR_DREAM_INGOT.get(), 0.25f, 200, "star_dream");
-        oreSmelting(pWriter, STAR_DREAM_SMELTABLES, RecipeCategory.MISC, Moditems.STAR_DREAM_INGOT.get(), 0.25f, 100, "star_dream");
+        oreBlasting(pWriter, STAR_DREAM_SMELTABLES, RecipeCategory.MISC, Moditems.STAR_DREAM_INGOT.get(), 0.25f, 100, "star_dream");
+        oreSmelting(pWriter, STAR_DREAM_SMELTABLES, RecipeCategory.MISC, Moditems.STAR_DREAM_INGOT.get(), 0.25f, 200, "star_dream");
+        oreSmelting(pWriter, KUN_MEAT_SMELTABLES, RecipeCategory.MISC, Moditems.KUN_MEAT.get(), 0.25f, 200, "star_dream");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.STAR_DREAM_BLOCK.get())
                 .pattern("SSS")
