@@ -25,6 +25,8 @@ public class ModCreativeModTabs {
                         pOutput.accept(Moditems.KUN_RAW_MEAT.get());
                         pOutput.accept(Moditems.KUN_COAL.get());
                         pOutput.accept(Moditems.KUN_BLOOD.get());
+                        pOutput.accept(Moditems.DREAMSTONE_HEART.get());
+                        pOutput.accept(Moditems.SIMPLE_STAR_DREAM_INGOT.get());
 
                         pOutput.accept(ModBlocks.DREAMSTONE_ORE_BLOCK.get());
                         pOutput.accept(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());

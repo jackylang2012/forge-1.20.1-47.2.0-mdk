@@ -24,12 +24,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(Moditems.RAW_STAR_DREAM_INGOT);
         simpleItem(Moditems.STAR_DREAM_INGOT);
         simpleItem(Moditems.STAR_DREAM_STRIDERS);
+        simpleItem(Moditems.SIMPLE_STAR_DREAM_INGOT);
+        simpleItem(Moditems.DREAMSTONE_HEART);
 
     }
 
-    private ItemModelBuilder simpleItem(RegistryObject<Item> item){
+    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(LclMod.MOD_ID, "item/" + item.getId().getPath()));
+                new ResourceLocation(LclMod.MOD_ID,"item/" + item.getId().getPath()));
     }
 }

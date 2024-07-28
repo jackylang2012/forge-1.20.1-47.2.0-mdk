@@ -25,6 +25,11 @@ public class Moditems {
             () -> new Item(new Item.Properties().food(ModFoods.KUN_RAW_MEAT)));
     public static final RegistryObject<Item> KUN_BLOOD = ITEMS.register("kun_blood",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DREAMSTONE_HEART = ITEMS.register("dreamstone_heart",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SIMPLE_STAR_DREAM_INGOT = ITEMS.register("simple_star_dream_ingot",
+            () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> KUN_COAL = ITEMS.register("kun_coal",
             () -> new FuelItem(new Item.Properties(), 36000));
 

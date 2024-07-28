@@ -28,16 +28,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         this.dropSelf(ModBlocks.STAR_DREAM_BLOCK.get());
         this.add(ModBlocks.DREAMSTONE_ORE_BLOCK.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.DREAMSTONE_ORE_BLOCK.get(), Moditems.STAR_DREAM_INGOT.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.DREAMSTONE_ORE_BLOCK.get(), Moditems.DREAMSTONE_HEART.get()));
         this.add(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get(), Moditems.STAR_DREAM_INGOT.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get(), Moditems.DREAMSTONE_HEART.get()));
 
     }
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,
                 this.applyExplosionDecay(pBlock,
                         LootItem.lootTableItem(item)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                                 .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 
