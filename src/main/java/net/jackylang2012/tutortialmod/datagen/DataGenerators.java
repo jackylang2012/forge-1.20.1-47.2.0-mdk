@@ -9,7 +9,6 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import javax.xml.crypto.Data;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = LclMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

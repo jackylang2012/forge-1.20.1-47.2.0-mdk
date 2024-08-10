@@ -20,6 +20,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
 
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.STAR_DREAM_BLOCK.get(),
+                        ModBlocks.DREAMSTONE_ORE_BLOCK.get(),
+                        ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());
+
         this.tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.STAR_DREAM_BLOCK.get());
 

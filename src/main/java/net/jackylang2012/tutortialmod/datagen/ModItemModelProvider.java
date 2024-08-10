@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.datagen;
 
 import net.jackylang2012.tutortialmod.LclMod;
-import net.jackylang2012.tutortialmod.items.Moditems;
+import net.jackylang2012.tutortialmod.items.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -17,15 +17,15 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(Moditems.KUN_BLOOD);
-        simpleItem(Moditems.KUN_COAL);
-        simpleItem(Moditems.KUN_MEAT);
-        simpleItem(Moditems.KUN_RAW_MEAT);
-        simpleItem(Moditems.RAW_STAR_DREAM_INGOT);
-        simpleItem(Moditems.STAR_DREAM_INGOT);
-        simpleItem(Moditems.STAR_DREAM_STRIDERS);
-        simpleItem(Moditems.SIMPLE_STAR_DREAM_INGOT);
-        simpleItem(Moditems.DREAMSTONE_HEART);
+        simpleItem(ModItems.KUN_BLOOD);
+        simpleItem(ModItems.KUN_COAL);
+        simpleItem(ModItems.KUN_MEAT);
+        simpleItem(ModItems.KUN_RAW_MEAT);
+        simpleItem(ModItems.RAW_STAR_DREAM_INGOT);
+        simpleItem(ModItems.STAR_DREAM_INGOT);
+        simpleItem(ModItems.STAR_DREAM_STRIDERS);
+        simpleItem(ModItems.SIMPLE_STAR_DREAM_INGOT);
+        simpleItem(ModItems.DREAMSTONE_HEART);
 
     }
 

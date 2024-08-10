@@ -2,7 +2,7 @@ package net.jackylang2012.tutortialmod;
 
 import com.mojang.logging.LogUtils;
 import net.jackylang2012.tutortialmod.items.ModCreativeModTabs;
-import net.jackylang2012.tutortialmod.items.Moditems;
+import net.jackylang2012.tutortialmod.items.ModItems;
 import net.jackylang2012.tutortialmod.items.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -34,7 +34,7 @@ public class LclMod {
 
         ModCreativeModTabs.register(modEventBus);
 
-        Moditems.registers(modEventBus);
+        ModItems.registers(modEventBus);
         ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
@@ -53,7 +53,7 @@ public class LclMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){
-            event.accept(Moditems.STAR_DREAM_STRIDERS);
+            event.accept(ModItems.STAR_DREAM_STRIDERS);
         }
     }
 

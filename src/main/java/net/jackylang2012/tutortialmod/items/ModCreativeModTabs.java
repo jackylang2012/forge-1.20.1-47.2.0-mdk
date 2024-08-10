@@ -15,18 +15,18 @@ public class ModCreativeModTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LclMod.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> DREAM_TAB = CREATIVE_MODE_TABS.register("stellar_dreamscapes",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Moditems.STAR_DREAM_INGOT.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.STAR_DREAM_INGOT.get()))
                     .title(Component.translatable("creativetab.stellar_dreamscapes"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(Moditems.STAR_DREAM_STRIDERS.get());
-                        pOutput.accept(Moditems.RAW_STAR_DREAM_INGOT.get());
-                        pOutput.accept(Moditems.STAR_DREAM_INGOT.get());
-                        pOutput.accept(Moditems.KUN_MEAT.get());
-                        pOutput.accept(Moditems.KUN_RAW_MEAT.get());
-                        pOutput.accept(Moditems.KUN_COAL.get());
-                        pOutput.accept(Moditems.KUN_BLOOD.get());
-                        pOutput.accept(Moditems.DREAMSTONE_HEART.get());
-                        pOutput.accept(Moditems.SIMPLE_STAR_DREAM_INGOT.get());
+                        pOutput.accept(ModItems.STAR_DREAM_STRIDERS.get());
+                        pOutput.accept(ModItems.RAW_STAR_DREAM_INGOT.get());
+                        pOutput.accept(ModItems.STAR_DREAM_INGOT.get());
+                        pOutput.accept(ModItems.KUN_MEAT.get());
+                        pOutput.accept(ModItems.KUN_RAW_MEAT.get());
+                        pOutput.accept(ModItems.KUN_COAL.get());
+                        pOutput.accept(ModItems.KUN_BLOOD.get());
+                        pOutput.accept(ModItems.DREAMSTONE_HEART.get());
+                        pOutput.accept(ModItems.SIMPLE_STAR_DREAM_INGOT.get());
 
                         pOutput.accept(ModBlocks.DREAMSTONE_ORE_BLOCK.get());
                         pOutput.accept(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());

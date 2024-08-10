@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.items.block;
 
 import net.jackylang2012.tutortialmod.LclMod;
-import net.jackylang2012.tutortialmod.items.Moditems;
+import net.jackylang2012.tutortialmod.items.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -39,7 +39,7 @@ public class ModBlocks {
     }
 
     private static <T extends Block>RegistryObject<Item> registryBlockItem(String name, RegistryObject<T> block) {
-        return Moditems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {
