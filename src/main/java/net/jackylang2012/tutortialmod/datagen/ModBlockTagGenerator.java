@@ -2,7 +2,6 @@ package net.jackylang2012.tutortialmod.datagen;
 
 import net.jackylang2012.tutortialmod.LclMod;
 import net.jackylang2012.tutortialmod.items.block.ModBlocks;
-import net.jackylang2012.tutortialmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;

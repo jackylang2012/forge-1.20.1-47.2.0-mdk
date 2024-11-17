@@ -8,12 +8,24 @@
   "item.stellar_dreamscapes.kun_coal": "鲲灵炭",
   "item.stellar_dreamscapes.simple_star_dream_ingot": "破损的星梦锭",
   "item.stellar_dreamscapes.dreamstone_heart": "破损的星梦粗锭",
+  "item.stellar_dreamscapes.dream_flint": "梦境打火石",
+  "item.stellar_dreamscapes.dream_breastplate": "梦境胸甲",
+  "item.stellar_dreamscapes.dream_bow": "梦境神弓",
+  "item.stellar_dreamscapes.dream_helmet": "梦境头盔",
+  "item.stellar_dreamscapes.dream_pickaxe": "梦境之稿",
+  "item.stellar_dreamscapes.dream_sword": "梦境斩空剑",
+  "item.stellar_dreamscapes.diamond_kun_coal": "钻石鲲灵碳",
+  "item.sword_of_the_brave": "残破的 勇士之剑",
+  "item.super_sword_of_the_brave": "勇士之剑",
+
+
+
 
 
 
 
   "block.stellar_dreamscapes.dreamstone_ore_block": "星梦原矿",
-  "block.stellar_dreamscapes.deepslate_dreamstone_ore_block": "深层星梦原矿",
+  "block.stellar_dreamse": "深层星梦原矿",
   "block.stellar_dreamscapes.star_dream_block": "星梦块",
 
   "creativetab.stellar_dreamscapes": "星辰梦界"

@@ -52,6 +52,50 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.SIMPLE_STAR_DREAM_INGOT.get()), has(ModItems.SIMPLE_STAR_DREAM_INGOT.get()))
                 .save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_SWORD_OF_THE_BRAVE.get())
+                .pattern(" B ")
+                .pattern(" B ")
+                .pattern(" A ")
+                .define('B', ModItems.STAR_DREAM_INGOT.get())
+                .define('A', Items.AMETHYST_SHARD)
+                .unlockedBy(getHasName(ModItems.STAR_DREAM_INGOT.get()), has(ModItems.STAR_DREAM_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DREAM_PICKAXE.get())
+                .pattern("BBB")
+                .pattern(" A ")
+                .pattern(" A ")
+                .define('B', ModItems.STAR_DREAM_INGOT.get())
+                .define('A', Items.AMETHYST_SHARD)
+                .unlockedBy(getHasName(ModItems.STAR_DREAM_INGOT.get()), has(ModItems.STAR_DREAM_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.KUN_COAL.get())
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .define('B', ModItems.KUN_BLOOD.get())
+                .define('A', Items.COAL)
+                .unlockedBy(getHasName(ModItems.STAR_DREAM_INGOT.get()), has(ModItems.STAR_DREAM_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DIAMOND_KUN_COAL.get())
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .define('B', Items.DIAMOND)
+                .define('A', ModItems.KUN_COAL.get())
+                .unlockedBy(getHasName(ModItems.STAR_DREAM_INGOT.get()), has(ModItems.STAR_DREAM_INGOT.get()))
+                .save(pWriter);
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DREAM_FLINT.get(), 1)
+                .requires(Items.FLINT)
+                .requires(ModItems.STAR_DREAM_INGOT.get())
+                .unlockedBy(getHasName(Items.FLINT), has(Items.FLINT))
+                .save(pWriter);
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.STAR_DREAM_INGOT.get(), 9)
                 .requires(ModBlocks.STAR_DREAM_BLOCK.get())
                 .unlockedBy(getHasName(ModBlocks.STAR_DREAM_BLOCK.get()), has(ModBlocks.STAR_DREAM_BLOCK.get()))

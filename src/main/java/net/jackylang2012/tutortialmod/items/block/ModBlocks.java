@@ -32,6 +32,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> STAR_DREAM_BLOCK = registryBlock("star_dream_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
+    public static final RegistryObject<Block> STRANGE_BLUE_ICE = registryBlock("strange_blue_ice",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registryBlockItem(name, toReturn);

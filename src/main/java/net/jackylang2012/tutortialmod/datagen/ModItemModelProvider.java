@@ -26,12 +26,38 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STAR_DREAM_STRIDERS);
         simpleItem(ModItems.SIMPLE_STAR_DREAM_INGOT);
         simpleItem(ModItems.DREAMSTONE_HEART);
+        simpleItem(ModItems.DREAM_FLINT);
+        simpleItem(ModItems.DREAM_BREASTPLATE);
+        simpleItem(ModItems.DREAM_BOW);
+        simpleItem(ModItems.DREAM_HELMET);
+        simpleItem(ModItems.DREAM_PANS);
+        simpleItem(ModItems.DIAMOND_KUN_COAL);
+        simpleItem(ModItems.FIRE_GEM);
+        simpleItem(ModItems.WATER_GEM);
+        simpleItem(ModItems.PLANT_GEM);
+        simpleItem(ModItems.GOLD_GEM);
+        simpleItem(ModItems.ICE_GEM);
+
+        handheldItem(ModItems.DREAM_PICKAXE);
+        handheldItem(ModItems.SWORD_OF_THE_BRAVE);
+        handheldItem(ModItems.SUPER_SWORD_OF_THE_BRAVE);
+
 
     }
-
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(LclMod.MOD_ID,"item/" + item.getId().getPath()));
+
+
     }
+    private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/handheld")).texture("layer0",
+                new ResourceLocation(LclMod.MOD_ID,"item/" + item.getId().getPath()));
+
+
+
+    }
+
 }

@@ -10,12 +10,14 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Blocks{
-
+        public static final TagKey<Block> NEED_DREAM_TOOL = tag("need_dream_tool");
+        public static final TagKey<Block> NEED_BRAVE_TOOL = tag("need_brave_tool");
 
         private static TagKey<Block> tag(String name){
             return BlockTags.create(new ResourceLocation(LclMod.MOD_ID, name));
 
         }
+
     }
 
     public static class Items{
