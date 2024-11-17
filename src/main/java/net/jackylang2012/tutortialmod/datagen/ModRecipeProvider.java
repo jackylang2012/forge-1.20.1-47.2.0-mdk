@@ -2,7 +2,7 @@ package net.jackylang2012.tutortialmod.datagen;
 
 import net.jackylang2012.tutortialmod.LclMod;
 import net.jackylang2012.tutortialmod.items.ModItems;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;

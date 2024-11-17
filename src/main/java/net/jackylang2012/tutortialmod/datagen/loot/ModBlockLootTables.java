@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.datagen.loot;
 
 import net.jackylang2012.tutortialmod.items.ModItems;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -29,7 +29,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get(),
                 block -> createCopperLikeOreDrops(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get(), ModItems.DREAMSTONE_HEART.get()));
 
+        // 让 StrangeBlueIce 不掉落任何物品
+        this.add(ModBlocks.STRANGE_BLUE_ICE.get(), block -> LootTable.lootTable());
     }
+
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,
                 this.applyExplosionDecay(pBlock,

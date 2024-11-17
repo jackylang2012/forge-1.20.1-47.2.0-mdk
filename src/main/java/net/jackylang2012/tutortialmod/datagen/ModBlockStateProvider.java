@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.datagen;
 
 import net.jackylang2012.tutortialmod.LclMod;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -19,6 +19,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK);
         blockWithItem(ModBlocks.DREAMSTONE_ORE_BLOCK);
         blockWithItem(ModBlocks.STAR_DREAM_BLOCK);
+        blockWithItem(ModBlocks.STRANGE_BLUE_ICE);
 
 
     }

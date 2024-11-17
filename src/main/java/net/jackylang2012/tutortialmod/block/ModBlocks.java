@@ -1,4 +1,4 @@
-package net.jackylang2012.tutortialmod.items.block;
+package net.jackylang2012.tutortialmod.block;
 
 import net.jackylang2012.tutortialmod.LclMod;
 import net.jackylang2012.tutortialmod.items.ModItems;
@@ -33,7 +33,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> STRANGE_BLUE_ICE = registryBlock("strange_blue_ice",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new StrangeBlueIceBlock(BlockBehaviour.Properties
+                    .copy(Blocks.BLUE_ICE)
+                    .strength(0.5f, 0.5f))); // 设置硬度和抗爆值为较低值
+
 
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

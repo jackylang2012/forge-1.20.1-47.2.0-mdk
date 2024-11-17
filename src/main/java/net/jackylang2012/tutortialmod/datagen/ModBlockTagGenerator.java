@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.datagen;
 
 import net.jackylang2012.tutortialmod.LclMod;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -30,6 +30,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.DREAMSTONE_ORE_BLOCK.get(),
                         ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());
+
 
     }
 }

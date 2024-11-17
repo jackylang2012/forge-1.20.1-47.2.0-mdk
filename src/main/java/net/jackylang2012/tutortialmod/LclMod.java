@@ -3,7 +3,7 @@ package net.jackylang2012.tutortialmod;
 import com.mojang.logging.LogUtils;
 import net.jackylang2012.tutortialmod.items.ModCreativeModTabs;
 import net.jackylang2012.tutortialmod.items.ModItems;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;

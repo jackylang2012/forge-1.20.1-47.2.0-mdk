@@ -1,7 +1,7 @@
 package net.jackylang2012.tutortialmod.items;
 
 import net.jackylang2012.tutortialmod.LclMod;
-import net.jackylang2012.tutortialmod.items.block.ModBlocks;
+import net.jackylang2012.tutortialmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -45,6 +45,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.DREAMSTONE_ORE_BLOCK.get());
                         pOutput.accept(ModBlocks.DEEPSLATE_DREAMSTONE_ORE_BLOCK.get());
                         pOutput.accept(ModBlocks.STAR_DREAM_BLOCK.get());
+                        pOutput.accept(ModBlocks.STRANGE_BLUE_ICE.get());
 
 
 
