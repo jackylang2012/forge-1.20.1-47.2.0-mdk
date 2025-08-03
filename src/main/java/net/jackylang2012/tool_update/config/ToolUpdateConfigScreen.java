@@ -77,9 +77,13 @@ public class ToolUpdateConfigScreen extends Screen {
 
         // 禁止升级附魔 输入框
         blacklistField = new EditBox(this.font, left, y, width, 20, Component.literal(""));
+        blacklistField.setMaxLength(512); // ⬅️ 先设置最大长度
         List<? extends String> blacklist = ToolUpdateConfig.BLACKLISTED_ENCHANTS.get();
-        blacklistField.setValue(String.join(",", blacklist));
+        blacklistField.setValue(String.join(",", blacklist)); // ⬅️ 再设置初始值
         addRenderableWidget(blacklistField);
+        blacklistField.setResponder(text -> {
+            blacklistField.setCursorPosition(text.length());  // 光标始终在末尾
+        });
         y += 24;
 
         // 保存按钮
