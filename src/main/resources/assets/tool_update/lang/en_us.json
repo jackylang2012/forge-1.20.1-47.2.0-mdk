@@ -1,15 +1,4 @@
 {
-  "gui.tool_update.enchant_choice": "Choose an Enchantment to Upgrade",
-  "item.tool_update.proficiency": "Proficiency: %d/%d",
-  "tooltip.tool_update.upgrade_available": "Ready for upgrade! Right-click to choose",
-
-  "title.tool_update.config": "Tool Upgrade Config",
-  "category.tool_update.general": "General",
-  "option.tool_update.baseCost": "Base Upgrade Cost",
-  "option.tool_update.maxLevelBonus": "Max Level Bonus Cost",
-  "option.tool_update.showProficiencyTooltip": "Show Proficiency Tooltip",
-  "option.tool_update.enableUpgradeEffects": "Enable Upgrade Effects",
-  "option.tool_update.blacklistedEnchants": "Blacklisted Enchantments",
-  "option.tool_update.effectVolume": "Effect Volume"
-
+  "key.tool_update.show_enchant_info": "Show Enchant Info",
+  "key.categories.tool_update": "Tool Update"
 }

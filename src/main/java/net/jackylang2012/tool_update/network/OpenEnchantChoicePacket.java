@@ -38,7 +38,8 @@ public class OpenEnchantChoicePacket {
                         )
                 );
             }
-        });
+        }
+        );
         ctx.get().setPacketHandled(true);
     }
 }

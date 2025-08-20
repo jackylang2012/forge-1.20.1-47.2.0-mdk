@@ -2,6 +2,7 @@ package net.jackylang2012.tool_update;
 
 import net.jackylang2012.tool_update.commands.ModCommands;
 import net.jackylang2012.tool_update.config.ToolUpdateConfig;
+import net.jackylang2012.tool_update.network.ModMessages;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +20,8 @@ public class ToolUpdate {
         MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ToolUpdateConfig.SPEC);
+        ModMessages.register();
+
     }
 
     @SubscribeEvent

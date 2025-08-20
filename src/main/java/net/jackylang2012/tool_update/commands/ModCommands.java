@@ -3,11 +3,14 @@ package net.jackylang2012.tool_update.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import net.jackylang2012.tool_update.client.KeyMappingsHandler;
 import net.jackylang2012.tool_update.config.ToolUpdateConfig;
+import net.jackylang2012.tool_update.util.KeybindManager;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -27,19 +30,12 @@ public class ModCommands {
         dispatcher.register(Commands.literal("tool_update")
                 // /tool_update list
                 .then(Commands.literal("list")
-                        .executes(ctx -> {
-                            Player player = ctx.getSource().getPlayer();
-                            ItemStack tool = player.getMainHandItem();
-                            if (tool.isEmpty()) {
-                                ctx.getSource().sendFailure(Component.literal("请手持工具"));
-                                return 0;
-                            }
+                        .executes(ctx -> showUpgrades(ctx.getSource()))
+                )
 
-                            int proficiency = ToolProficiency.getProficiency(tool);
-                            Component message = EnchantUtils.createEnchantList(tool, proficiency);
-                            ctx.getSource().sendSuccess(() -> message, false);
-                            return 1;
-                        })
+                // 新增的show_upgrades命令
+                .then(Commands.literal("show_upgrades")
+                        .executes(ctx -> showUpgrades(ctx.getSource()))
                 )
 
                 // /tool_update upgrade <enchant_id> <cost> <proficiency_at_click>
@@ -74,7 +70,7 @@ public class ModCommands {
 
                                                     int currentProficiency = ToolProficiency.getProficiency(tool);
                                                     if (currentProficiency != storedProficiency) {
-                                                        ctx.getSource().sendFailure(Component.literal("该升级信息已被使用，请重新使用[shift + 右键]获取升级列表"));
+                                                        ctx.getSource().sendFailure(createRefreshMessage());
                                                         return 0;
                                                     }
 
@@ -141,5 +137,45 @@ public class ModCommands {
                         )
                 )
         );
+    }
+
+    // 显示升级列表的公共方法
+    private static int showUpgrades(CommandSourceStack source) {
+        if (!(source.getEntity() instanceof Player player)) {
+            source.sendFailure(Component.literal("只有玩家可以使用此命令"));
+            return 0;
+        }
+
+        ItemStack tool = player.getMainHandItem();
+        if (tool.isEmpty()) {
+            source.sendFailure(Component.literal("请手持工具"));
+            return 0;
+        }
+
+        int proficiency = ToolProficiency.getProficiency(tool);
+        Component message = EnchantUtils.createEnchantList(tool, proficiency);
+        source.sendSuccess(() -> message, false);
+        return 1;
+    }
+
+    // 创建刷新提示消息
+    private static Component createRefreshMessage() {
+        return Component.literal("该升级信息已过期，请重新使用[")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(KeybindManager.getKeybind())
+                        .withStyle(Style.EMPTY
+                                .withColor(ChatFormatting.YELLOW)
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                        Component.literal("当前设置的快捷键").withStyle(ChatFormatting.GRAY)))))
+                .append("]获取升级列表或点击")
+                .append(Component.literal("这里")
+                        .withStyle(Style.EMPTY
+                                .withColor(ChatFormatting.BLUE)
+                                .withUnderlined(true)
+                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tool_update show_upgrades"))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                        Component.literal("点击重新显示升级列表").withStyle(ChatFormatting.GRAY)))))
+                .append("重新打开")
+                .withStyle(ChatFormatting.GRAY);
     }
 }

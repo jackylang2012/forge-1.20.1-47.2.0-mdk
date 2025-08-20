@@ -20,5 +20,11 @@ public class NetworkHandler {
                 OpenEnchantChoicePacket::encode,
                 OpenEnchantChoicePacket::decode,
                 OpenEnchantChoicePacket::handle);
+
+        // 添加 UpgradeEffectPacket 的注册
+        INSTANCE.registerMessage(id++, UpgradeEffectPacket.class,
+                UpgradeEffectPacket::encode,
+                UpgradeEffectPacket::decode,
+                UpgradeEffectPacket::handle);
     }
 }

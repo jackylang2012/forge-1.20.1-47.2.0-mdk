@@ -61,9 +61,27 @@ public class EnchantUtils {
             int cost,
             int proficiency
     ) {
-        boolean canUpgrade = proficiency >= cost;
-        boolean isMaxLevel = level >= 15;
-        ChatFormatting color = canUpgrade ? ChatFormatting.GREEN : ChatFormatting.RED;
+        boolean isBlacklisted = ToolUpdateConfig.BLACKLISTED_ENCHANTS.get().contains(enchantId.toString());
+        boolean isMaxLevel = level >= ToolUpdateConfig.MAX_ENCHANT_LEVEL.get();
+        boolean canUpgrade = !isBlacklisted && !isMaxLevel && proficiency >= cost;
+
+        // 状态判断优先级：黑名单 > 最大等级 > 可升级/熟练度不足
+        ChatFormatting color;
+        String statusText;
+
+        if (isBlacklisted) {
+            color = ChatFormatting.RED;
+            statusText = "该附魔已被禁用升级";
+        } else if (isMaxLevel) {
+            color = ChatFormatting.DARK_PURPLE;
+            statusText = "已达到最大等级";
+        } else if (canUpgrade) {
+            color = ChatFormatting.GREEN;
+            statusText = "可升级";
+        } else {
+            color = ChatFormatting.RED;
+            statusText = "熟练度不足";
+        }
 
         MutableComponent line = Component.literal(" • ")
                 .append(enchant.getFullname(level))
@@ -75,29 +93,36 @@ public class EnchantUtils {
                 .append(Component.literal(String.valueOf(cost)).withStyle(color))
                 .append(")")
                 .append("\n  ")
-                .append(Component.literal(isMaxLevel ? "已达到最大等级" : (canUpgrade ? "可升级" : "熟练度不足"))
-                        .withStyle(isMaxLevel ? ChatFormatting.DARK_PURPLE : color))
+                .append(Component.literal(statusText).withStyle(color))
                 .append("\n");
 
-        if (!isMaxLevel && canUpgrade && !ToolUpdateConfig.BLACKLISTED_ENCHANTS.get().contains(enchantId.toString())) {
+        // 添加悬浮提示
+        line = line.withStyle(style -> style
+                .withHoverEvent(new HoverEvent(
+                        HoverEvent.Action.SHOW_TEXT,
+                        createHoverText(enchant, level, nextLevel, cost, isMaxLevel, isBlacklisted)
+                )));
+
+        // 只有可升级的附魔才添加点击事件
+        if (canUpgrade) {
             String enchantIdStr = "\"" + enchantId.toString() + "\"";
             String cmd = String.format("/tool_update upgrade %s %d %d", enchantIdStr, cost, proficiency);
-
-            line = line.withStyle(style -> style
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, cmd))
-                    .withHoverEvent(new HoverEvent(
-                            HoverEvent.Action.SHOW_TEXT,
-                            createHoverText(enchant, level, nextLevel, cost, isMaxLevel)
-                    )));
-        } else {
-            line = line.withStyle(style -> style
-                    .withHoverEvent(new HoverEvent(
-                            HoverEvent.Action.SHOW_TEXT,
-                            createHoverText(enchant, level, nextLevel, cost, isMaxLevel)
-                    )));
+            line = line.withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, cmd)));
         }
 
         return line;
+    }
+
+    private static Component getStatusText(boolean isMaxLevel, boolean isBlacklisted, boolean canUpgrade, ChatFormatting color) {
+        if (isMaxLevel) {
+            return Component.literal("已达到最大等级").withStyle(ChatFormatting.DARK_PURPLE);
+        } else if (isBlacklisted) {
+            return Component.literal("该附魔已被禁用升级").withStyle(ChatFormatting.RED);
+        } else if (canUpgrade) {
+            return Component.literal("可升级").withStyle(ChatFormatting.GREEN);
+        } else {
+            return Component.literal("熟练度不足").withStyle(ChatFormatting.RED);
+        }
     }
 
     private static Component createHoverText(
@@ -105,22 +130,29 @@ public class EnchantUtils {
             int currentLevel,
             int nextLevel,
             int cost,
-            boolean isMaxLevel
+            boolean isMaxLevel,
+            boolean isBlacklisted
     ) {
         MutableComponent hover = Component.literal("附魔: ")
                 .append(enchant.getFullname(currentLevel))
                 .append("\n当前等级: ")
                 .append(Component.literal(String.valueOf(currentLevel)).withStyle(ChatFormatting.YELLOW));
 
-        if (!isMaxLevel) {
+        if (isMaxLevel) {
+            hover.append("\n").append(Component.literal("已达到最大等级").withStyle(ChatFormatting.DARK_PURPLE));
+        } else if (isBlacklisted) {
+            hover.append("\n").append(Component.literal("该附魔已被禁用升级").withStyle(ChatFormatting.RED));
+        } else {
             hover.append("\n下一等级: ")
                     .append(Component.literal(String.valueOf(nextLevel)).withStyle(ChatFormatting.YELLOW))
                     .append("\n消耗熟练度: ")
                     .append(Component.literal(String.valueOf(cost)).withStyle(ChatFormatting.GOLD));
-        } else {
-            hover.append("\n").append(Component.literal("已达到最大等级").withStyle(ChatFormatting.DARK_PURPLE));
         }
 
-        return hover.append("\n\n点击升级").withStyle(ChatFormatting.GRAY);
+        if (!isMaxLevel && !isBlacklisted) {
+            hover.append("\n\n点击升级").withStyle(ChatFormatting.GRAY);
+        }
+
+        return hover;
     }
 }
