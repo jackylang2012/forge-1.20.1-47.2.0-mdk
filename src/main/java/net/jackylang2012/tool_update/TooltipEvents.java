@@ -20,8 +20,14 @@ public class TooltipEvents {
 
         int proficiency = ToolProficiency.getProficiency(stack);
         if (proficiency > 0) {
-            Component proficiencyLine = Component.literal("熟练度: " + proficiency)
-                    .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD);
+            // 创建更丰富的工具提示
+            Component proficiencyLine = Component.literal("✦ ")
+                    .withStyle(ChatFormatting.GOLD)
+                    .append(Component.translatable("tooltip.proficiency", proficiency)
+                            .withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(" ✦")
+                            .withStyle(ChatFormatting.GOLD));
+
             event.getToolTip().add(proficiencyLine);
         }
     }

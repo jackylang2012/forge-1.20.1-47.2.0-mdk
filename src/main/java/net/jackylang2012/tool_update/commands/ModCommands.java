@@ -51,7 +51,7 @@ public class ModCommands {
                                                     Player player = ctx.getSource().getPlayer();
                                                     ItemStack tool = player.getMainHandItem();
                                                     if (tool.isEmpty()) {
-                                                        ctx.getSource().sendFailure(Component.literal("请手持工具"));
+                                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.no_tool"));
                                                         return 0;
                                                     }
 
@@ -61,14 +61,14 @@ public class ModCommands {
 
                                                     // 检查黑名单
                                                     if (ToolUpdateConfig.BLACKLISTED_ENCHANTS.get().contains(enchantIdStr)) {
-                                                        ctx.getSource().sendFailure(Component.literal("该附魔已被禁止升级"));
+                                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.enchant_blacklisted"));
                                                         return 0;
                                                     }
 
                                                     ResourceLocation enchantId = new ResourceLocation(enchantIdStr);
                                                     Enchantment enchant = BuiltInRegistries.ENCHANTMENT.get(enchantId);
                                                     if (enchant == null) {
-                                                        ctx.getSource().sendFailure(Component.literal("未知的附魔 ID: " + enchantIdStr));
+                                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.unknown_enchant", enchantIdStr));
                                                         return 0;
                                                     }
 
@@ -79,13 +79,13 @@ public class ModCommands {
                                                     }
 
                                                     if (currentProficiency < cost) {
-                                                        ctx.getSource().sendFailure(Component.literal("熟练度不足！当前: " + currentProficiency + "，需要: " + cost));
+                                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.insufficient_proficiency", currentProficiency, cost));
                                                         return 0;
                                                     }
 
                                                     Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(tool);
                                                     if (!enchants.containsKey(enchant)) {
-                                                        ctx.getSource().sendFailure(Component.literal("该工具没有该附魔"));
+                                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.no_enchant"));
                                                         return 0;
                                                     }
 
@@ -227,10 +227,9 @@ public class ModCommands {
                                                     }
 
                                                     ctx.getSource().sendSuccess(() ->
-                                                                    Component.literal("成功将 ")
-                                                                            .append(enchant.getFullname(currentLevel))
-                                                                            .append(Component.literal(" 升级为 "))
-                                                                            .append(enchant.getFullname(currentLevel + 1)),
+                                                                    Component.translatable("command.tool_update.upgrade_success",
+                                                                            enchant.getFullname(currentLevel),
+                                                                            enchant.getFullname(currentLevel + 1)),
                                                             false
                                                     );
                                                     return 1;
@@ -247,13 +246,13 @@ public class ModCommands {
                                     Player player = ctx.getSource().getPlayer();
                                     ItemStack tool = player.getMainHandItem();
                                     if (tool.isEmpty()) {
-                                        ctx.getSource().sendFailure(Component.literal("请手持工具"));
+                                        ctx.getSource().sendFailure(Component.translatable("command.tool_update.no_tool"));
                                         return 0;
                                     }
                                     int amount = IntegerArgumentType.getInteger(ctx, "amount");
                                     ToolProficiency.setProficiency(tool, amount);
                                     ctx.getSource().sendSuccess(() ->
-                                            Component.literal("已设置熟练度为 " + amount), false);
+                                            Component.translatable("command.tool_update.set_proficiency", amount), false);
                                     return 1;
                                 })
                         )
@@ -264,13 +263,13 @@ public class ModCommands {
     // 显示升级列表的公共方法
     private static int showUpgrades(CommandSourceStack source) {
         if (!(source.getEntity() instanceof Player player)) {
-            source.sendFailure(Component.literal("只有玩家可以使用此命令"));
+            source.sendFailure(Component.translatable("command.tool_update.no_tool"));
             return 0;
         }
 
         ItemStack tool = player.getMainHandItem();
         if (tool.isEmpty()) {
-            source.sendFailure(Component.literal("请手持工具"));
+            source.sendFailure(Component.translatable("command.tool_update.no_tool"));
             return 0;
         }
 
@@ -282,22 +281,23 @@ public class ModCommands {
 
     // 创建刷新提示消息
     private static Component createRefreshMessage() {
-        return Component.literal("该升级信息已过期，请重新使用[")
+        return Component.translatable("command.tool_update.proficiency_outdated")
                 .withStyle(ChatFormatting.GRAY)
                 .append(Component.literal(KeybindManager.getKeybind())
                         .withStyle(Style.EMPTY
                                 .withColor(ChatFormatting.YELLOW)
                                 .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                        Component.literal("当前设置的快捷键").withStyle(ChatFormatting.GRAY)))))
-                .append("]获取升级列表或点击")
-                .append(Component.literal("这里")
-                        .withStyle(Style.EMPTY
-                                .withColor(ChatFormatting.BLUE)
-                                .withUnderlined(true)
-                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tool_update show_upgrades"))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                        Component.literal("点击重新显示升级列表").withStyle(ChatFormatting.GRAY)))))
-                .append("重新打开")
-                .withStyle(ChatFormatting.GRAY);
+                                        Component.translatable("command.tool_update.keybind_hint").withStyle(ChatFormatting.GRAY)))))
+                .append("]")
+                .append(Component.translatable("command.tool_update.refresh_prompt")
+                        .append(Component.literal(" ")
+                                .append(Component.translatable("command.tool_update.click_here")
+                                        .withStyle(Style.EMPTY
+                                                .withColor(ChatFormatting.BLUE)
+                                                .withUnderlined(true)
+                                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tool_update show_upgrades"))
+                                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                                        Component.translatable("command.tool_update.refresh_hint").withStyle(ChatFormatting.GRAY))))))
+                        .withStyle(ChatFormatting.GRAY));
     }
 }

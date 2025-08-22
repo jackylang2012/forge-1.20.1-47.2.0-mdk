@@ -1,4 +1,24 @@
 {
   "key.tool_update.show_enchant_info": "显示附魔信息",
-  "key.categories.tool_update": "工具升级"
+  "key.categories.tool_update": "工具升级",
+  "command.tool_update.no_tool": "请手持工具",
+  "command.tool_update.enchant_blacklisted": "该附魔已被禁止升级",
+  "command.tool_update.unknown_enchant": "未知的附魔 ID: %s",
+  "command.tool_update.proficiency_outdated": "升级信息已过期",
+  "command.tool_update.insufficient_proficiency": "熟练度不足！当前: %d，需要: %d",
+  "command.tool_update.no_enchant": "该工具没有该附魔",
+  "command.tool_update.upgrade_success": "成功将 %s 升级为 %s",
+  "command.tool_update.set_proficiency": "已设置熟练度为 %d",
+  "command.tool_update.refresh_hint": "点击重新显示升级列表",
+  "command.tool_update.keybind_hint": "当前设置的快捷键",
+  "tooltip.proficiency": "熟练度: %d",
+  "tooltip.upgrade_cost": "升级消耗: %d",
+  "tooltip.click_to_upgrade": "点击升级此附魔",
+
+  "gui.enchant_list.title": "§6§l=== 可升级附魔 §b(可用熟练度: %d) §6===§r",
+  "gui.enchant_list.upgrade_bracket": "§a[§r",
+  "gui.enchant_list.upgrade_arrow": " §e→§r ",
+  "gui.enchant_list.upgrade_cost": "§7]（消耗: §6%d§7） §9← §b点击升级§r",
+  "gui.enchant_list.max_level_bracket": "§8[§r",
+  "gui.enchant_list.max_level_text": "] §6★ 最大等级 ★ §7- §8无法继续升级§r"
 }

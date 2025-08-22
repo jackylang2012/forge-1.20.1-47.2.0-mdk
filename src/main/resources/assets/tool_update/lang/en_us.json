@@ -1,4 +1,23 @@
 {
   "key.tool_update.show_enchant_info": "Show Enchant Info",
-  "key.categories.tool_update": "Tool Update"
+  "key.categories.tool_update": "Tool Update",
+  "command.tool_update.no_tool": "Please hold a tool",
+  "command.tool_update.enchant_blacklisted": "This enchantment is forbidden from upgrading",
+  "command.tool_update.unknown_enchant": "Unknown enchantment ID: %s",
+  "command.tool_update.proficiency_outdated": "Upgrade information expired",
+  "command.tool_update.insufficient_proficiency": "Insufficient proficiency! Current: %d, Required: %d",
+  "command.tool_update.no_enchant": "This tool does not have this enchantment",
+  "command.tool_update.upgrade_success": "Successfully upgraded %s to %s",
+  "command.tool_update.set_proficiency": "Set proficiency to %d",
+  "command.tool_update.refresh_hint": "Click to refresh upgrade list",
+  "command.tool_update.keybind_hint": "Currently set keybind",
+  "tooltip.proficiency": "Proficiency: %d",
+  "tooltip.upgrade_cost": "Upgrade Cost: %d",
+  "tooltip.click_to_upgrade": "Click to upgrade this enchantment",
+  "gui.enchant_list.title": "§6§l=== Available Upgrades §b(Proficiency: %d) §6===§r",
+  "gui.enchant_list.upgrade_bracket": "§a[§r",
+  "gui.enchant_list.upgrade_arrow": " §e→§r ",
+  "gui.enchant_list.upgrade_cost": "§7] (Cost: §6%d§7) §9← §bClick to upgrade§r",
+  "gui.enchant_list.max_level_bracket": "§8[§r",
+  "gui.enchant_list.max_level_text": "] §6★ MAX LEVEL ★ §7- §8Cannot upgrade further§r"
 }

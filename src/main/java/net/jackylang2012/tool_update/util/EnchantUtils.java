@@ -12,39 +12,126 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import java.util.Map;
 
 public class EnchantUtils {
-    public static Component createEnchantList(ItemStack stack, int proficiency) {
-        if (stack.isEmpty()) {
-            return Component.literal("无效的物品").withStyle(ChatFormatting.RED);
+    public static Component createEnchantList(ItemStack tool, int proficiency) {
+        MutableComponent message = Component.empty();
+
+        // 标题 - 金色标题，青色熟练度
+        message.append(Component.translatable("gui.enchant_list.title", proficiency))
+                .append("\n\n");
+
+        Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(tool);
+
+        for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
+            Enchantment enchant = entry.getKey();
+            int currentLevel = entry.getValue();
+            int maxLevel = enchant.getMaxLevel();
+            String currentLevelStr = getRomanNumeral(currentLevel);
+            String enchantName = enchant.getFullname(currentLevel).getString().replace(currentLevelStr, "").trim();
+
+            if (currentLevel < maxLevel) {
+                int cost = calculateUpgradeCost(enchant, currentLevel);
+                String nextLevel = getRomanNumeral(currentLevel + 1);
+
+                // 根据等级范围分配颜色
+                ChatFormatting levelColor = getLevelColor(currentLevel);
+                ChatFormatting nextLevelColor = getLevelColor(currentLevel + 1);
+
+                // 构建彩色升级行
+                MutableComponent upgradeLine = Component.translatable("gui.enchant_list.upgrade_bracket") // 绿色[
+                        .append(Component.literal(enchantName) // 附魔名称（亮粉色）
+                                .withStyle(ChatFormatting.LIGHT_PURPLE))
+                        .append(Component.literal(" " + currentLevelStr) // 当前等级（根据等级颜色）
+                                .withStyle(levelColor))
+                        .append(Component.translatable("gui.enchant_list.upgrade_arrow")) // 白色→
+                        .append(Component.literal(" " + nextLevel) // 下一等级（根据等级颜色）
+                                .withStyle(nextLevelColor))
+                        .append(Component.translatable("gui.enchant_list.upgrade_cost", cost)) // 灰色消耗，蓝色←，青色点击
+                        .withStyle(style -> style
+                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
+                                        createUpgradeCommand(enchant, cost, proficiency)))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                        Component.translatable("tooltip.click_to_upgrade")
+                                                .withStyle(ChatFormatting.AQUA))));
+
+                message.append(upgradeLine).append("\n");
+            } else {
+                // 构建最大等级行 - 特殊提示
+                MutableComponent maxLevelLine = Component.translatable("gui.enchant_list.max_level_bracket") // 金色[
+                        .append(Component.literal(enchantName) // 附魔名称（亮粉色）
+                                .withStyle(ChatFormatting.LIGHT_PURPLE))
+                        .append(Component.literal(" " + currentLevelStr) // 当前等级（彩虹色表示最大）
+                                .withStyle(getMaxLevelColor()))
+                        .append(Component.translatable("gui.enchant_list.max_level_text")) // 特殊最大等级提示
+                        .withStyle(ChatFormatting.GOLD); // 金色提示文字
+
+                message.append(maxLevelLine).append("\n");
+            }
         }
-
-        if (!stack.isEnchanted()) {
-            return Component.literal("该物品没有附魔").withStyle(ChatFormatting.YELLOW);
-        }
-
-        MutableComponent message = Component.literal("=== 可升级附魔 ===\n")
-                .append(Component.literal("可用熟练度: " + proficiency + "\n").withStyle(ChatFormatting.GOLD))
-                .withStyle(ChatFormatting.BOLD);
-
-        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-        if (enchantments.isEmpty()) {
-            return message.append(Component.literal("无有效附魔").withStyle(ChatFormatting.GRAY));
-        }
-
-        enchantments.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey((e1, e2) ->
-                        e1.getFullname(1).getString().compareToIgnoreCase(e2.getFullname(1).getString())))
-                .forEach(entry -> {
-                    Enchantment enchant = entry.getKey();
-                    int level = entry.getValue();
-                    int nextLevel = level + 1;
-                    int cost = calculateUpgradeCost(enchant, level);
-                    ResourceLocation id = BuiltInRegistries.ENCHANTMENT.getKey(enchant);
-                    if (id != null) {
-                        message.append(createEnchantLine(enchant, id, level, nextLevel, cost, proficiency));
-                    }
-                });
 
         return message;
+    }
+
+    // 根据等级范围分配颜色
+    private static ChatFormatting getLevelColor(int level) {
+        if (level <= 2) {
+            return ChatFormatting.GRAY; // 1-2级：灰色（初级）
+        } else if (level <= 4) {
+            return ChatFormatting.WHITE; // 3-4级：白色（中级）
+        } else if (level <= 6) {
+            return ChatFormatting.YELLOW; // 5-6级：黄色（高级）
+        } else if (level <= 8) {
+            return ChatFormatting.GOLD; // 7-8级：金色（专家级）
+        } else if (level <= 10) {
+            return ChatFormatting.AQUA; // 9-10级：青色（大师级）
+        } else {
+            return ChatFormatting.LIGHT_PURPLE; // 10级以上：粉紫色（传奇级）
+        }
+    }
+
+    // 最大等级的特殊颜色（彩虹效果）
+    private static Style getMaxLevelColor() {
+        return Style.EMPTY
+                .withColor(TextColor.fromRgb(0xFF0000)) // 红色
+                .withBold(true);
+    }
+
+    // 为最大等级添加特殊提示文字
+    private static MutableComponent getMaxLevelText() {
+        return Component.literal("] ")
+                .withStyle(ChatFormatting.GOLD)
+                .append(Component.literal("★ MAX LEVEL ★")
+                        .withStyle(Style.EMPTY
+                                .withColor(TextColor.fromRgb(0xFFD700)) // 金色
+                                .withBold(true)))
+                .append(Component.literal(" - ")
+                        .withStyle(ChatFormatting.GRAY))
+                .append(Component.literal("无法继续升级")
+                        .withStyle(ChatFormatting.DARK_GRAY));
+    }
+
+    // 罗马数字转换工具方法（算法版，支持 1 - 100）
+    private static String getRomanNumeral(int number) {
+        if (number <= 0 || number > 100) {
+            return String.valueOf(number); // 超出范围就直接返回数字
+        }
+
+        int[] values = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbols = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < values.length; i++) {
+            while (number >= values[i]) {
+                number -= values[i];
+                sb.append(symbols[i]);
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String createUpgradeCommand(Enchantment enchant, int cost, int proficiency) {
+        ResourceLocation enchantId = BuiltInRegistries.ENCHANTMENT.getKey(enchant);
+        return String.format("/tool_update upgrade %s %d %d",
+                enchantId.toString(), cost, proficiency);
     }
 
     private static int calculateUpgradeCost(Enchantment enchant, int level) {
